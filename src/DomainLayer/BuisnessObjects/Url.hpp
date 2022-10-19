@@ -1,26 +1,25 @@
-#pragma once
+#pragma  once
 #include <string>
 
-
-class OriginalUrlDTO final
+class OriginalUrlBO final
 {
   public:
-    OriginalUrlDTO()  = default;
-    OriginalUrlDTO(std::string url) : url_ {std::move(url)} {}
+    OriginalUrlBO() =default;
+    OriginalUrlBO(std::string url) : url_{std::move(url)} {}
 
     void SetUrl(std::string url) { url_ = std::move(url);}
-    [[nodiscard]] std::string GetUrl() const  { return url_;}
+    [[nodiscard]] std::string GetUrl() const  { return url_; }
 
     bool IsNull() const {return url_.empty();}
   private:
     std::string url_{};
 };
 
-class AliasUrlDTO final
+class AliasUrlBO final
 {
   public:
-    AliasUrlDTO() = default;
-    AliasUrlDTO(std::string url) : url_{std::move(url)} {}
+    AliasUrlBO() = default;
+    AliasUrlBO(std::string url) : url_{std::move(url)} {}
 
     void SetUrl(std::string url) { url_ = std::move(url);}
     [[nodiscard]] std::string GetUrl() const { return url_;}
@@ -28,4 +27,10 @@ class AliasUrlDTO final
     bool IsNull() const {return url_.empty();}
   private:
     std::string url_{};
+};
+
+struct ComposedUrlsBO
+{
+    AliasUrlBO alias_url;
+    OriginalUrlBO original_url;
 };

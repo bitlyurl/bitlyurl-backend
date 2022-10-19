@@ -10,3 +10,9 @@ check_include_file_cxx(coroutine HAS_COROUTINE)
 
 find_package(Drogon CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
+
+add_subdirectory("InterfaceLayer/")
+add_subdirectory("DomainLayer/")
+add_subdirectory("DataAccessLayer/")
+
+target_link_libraries(${PROJECT_NAME} PRIVATE url_controller)
