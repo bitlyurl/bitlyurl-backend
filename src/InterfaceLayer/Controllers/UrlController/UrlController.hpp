@@ -2,8 +2,12 @@
 #include <drogon/HttpController.h>
 #include <drogon/HttpAppFramework.h>
 
-#include "../utils/RequestParser.hpp"
+
+#include "../../utils/Mutation.hpp"
+#include "../../utils/RequestParser.hpp"
+
 #include "Services/CoreUrlService/CoreUrlService.hpp"
+
 
 class UrlHttpController final : public drogon::HttpController<UrlHttpController>
 {
@@ -13,7 +17,8 @@ class UrlHttpController final : public drogon::HttpController<UrlHttpController>
     using Coro = drogon::Task<T>;
 
     public:
-    
+    UrlHttpController() : core_service{std::make_unique<CoreUrlService>()}{}
+
     METHOD_LIST_BEGIN
 
         ADD_METHOD_TO(UrlHttpController::CreateAliasUrl,  "/app",     {drogon::Post});
@@ -41,5 +46,5 @@ class UrlHttpController final : public drogon::HttpController<UrlHttpController>
     Coro<ResponseType> GetOriginalUrlBy(const drogon::HttpRequestPtr,std::string&&);
     
     private:
-    /*smapr-pointers to services */
+    std::unique_ptr<CoreUrlService> core_service;
 };

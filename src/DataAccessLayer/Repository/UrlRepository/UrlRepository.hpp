@@ -9,9 +9,7 @@ class UrlRepository final : public IRepository<AliasUrlEntity,ComposedUrlsEntity
     using Coro = drogon::Task<T>;
 
  public:
-        UrlRepository(drogon::nosql::RedisClientPtr redis_ptr) : 
-                        redis_client{redis_ptr}
-                        {}
+        UrlRepository(drogon::nosql::RedisClientPtr redis_ptr) : redis_client{redis_ptr} {}
 
         [[nodiscard]] Coro<ComposedUrlsEntity> GetBy(const AliasUrlEntity&) override;
 

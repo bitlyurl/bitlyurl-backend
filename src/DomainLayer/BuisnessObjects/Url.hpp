@@ -19,14 +19,14 @@ class AliasUrlBO final
 {
   public:
     AliasUrlBO() = default;
-    AliasUrlBO(std::string url) : url_{std::move(url)} {}
+    AliasUrlBO(std::string alias) : alias_{std::move(alias)} {}
 
-    void SetUrl(std::string url) { url_ = std::move(url);}
-    [[nodiscard]] std::string GetUrl() const { return url_;}
+    void SetAlias(std::string alias) { alias_ = std::move(alias);}
+    [[nodiscard]] std::string GetAlias() const { return alias_;}
 
-    bool IsNull() const {return url_.empty();}
+    bool IsNull() const {return alias_.empty();}
   private:
-    std::string url_{};
+    std::string alias_{};
 };
 
 struct ComposedUrlsBO

@@ -18,15 +18,15 @@ class OriginalUrlEntity final
 
 class AliasUrlEntity final
 {
- public:
+  public:
     AliasUrlEntity() = default;
     AliasUrlEntity(std::string alias) : alias_{std::move(alias)} {}
 
     void SetAlias(std::string alias) { alias_ = std::move(alias);}
     [[nodiscard]] std::string GetAlias() const { return alias_;}
 
-    bool IsNull() const { return alias_.empty();}
- private:
+    bool IsNull() const {return alias_.empty();}
+  private:
     std::string alias_{};
 };
 

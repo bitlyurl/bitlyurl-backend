@@ -1,5 +1,5 @@
 #pragma once
-#include "../../DTOs/Url.hpp"
+#include "../DTOs/Url.hpp"
 #include <drogon/HttpAppFramework.h>
 
 
@@ -35,7 +35,7 @@ namespace utils
 
            /*validation*/
            if(!url_payload.empty())
-            short_url.SetUrl(std::move(url_payload));
+            short_url.SetAlias(std::move(url_payload));
            else
              throw std::runtime_error("Invalid payload for AliasUrlDTO object");
 
@@ -47,7 +47,7 @@ namespace utils
            OriginalUrlDTO orig_url;
            const auto json = *request->getJsonObject();
            std::string url_payload = json["original_url"].as<std::string>(); 
-
+           LOG_DEBUG<< "Got url : "<< url_payload <<'\n';
            /*validation*/
            if(!url_payload.empty())
             orig_url.SetUrl(std::move(url_payload));

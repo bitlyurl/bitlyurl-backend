@@ -1,6 +1,4 @@
 #pragma once
-#include <concepts>
-
 #include <drogon/HttpAppFramework.h>
 
 
@@ -18,9 +16,7 @@ class IRepository
 
     virtual Coro<void> Create(const ValueType&) = 0;
 
-    /* Method As() allows to expand functionality of base class by derived's clases methods */
-    template<std::derived_from<IRepository> DerivedType>
-    DerivedType* As() { return dynamic_cast<DerivedType*>(this);}
-
     virtual ~IRepository() = default;
 };
+
+

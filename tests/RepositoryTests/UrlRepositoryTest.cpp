@@ -12,38 +12,18 @@ DROGON_TEST(UrlRepositoryTest)
 
        UrlRepository repo(redis_client);
 
-       AliasUrlEntity alias("alias");
-       OriginalUrlEntity original("http://localhost");
+       AliasUrlEntity alias("'f");
+       OriginalUrlEntity original("abc");
 
        ComposedUrlsEntity composed{alias,original};
-
+        
        co_await repo.Create(composed);
        auto  result = co_await repo.GetBy(alias);
-       
-       CHECK((!result.alias_url.IsNull() && !result.original_url.IsNull()));
-       CHECK(result.original_url.GetUrl() == original.GetUrl());
-    };
-
-    auto url_repo_test2 = [TEST_CTX]() -> drogon::Task<void>
-    {
-       auto redis_client = drogon::app().getRedisClient();
-       CO_REQUIRE(redis_client != nullptr);
-
-       UrlRepository repo(redis_client);
-
-       AliasUrlEntity alias("new_alias");
-       OriginalUrlEntity original("http://google.com");
-
-       ComposedUrlsEntity composed{alias,original};
-
-       co_await repo.Create(composed);
-       auto  result = co_await repo.GetBy(alias);
-       
+       LOG_DEBUG << result.alias_url.GetAlias() <<" "<< result.original_url.GetUrl() <<'\n';
        CHECK((!result.alias_url.IsNull() && !result.original_url.IsNull()));
        CHECK(result.original_url.GetUrl() == original.GetUrl());
     };
     drogon::sync_wait(url_repo_test1());
-    drogon::sync_wait(url_repo_test2());
 }
 
 int main(int argc,char** argv)
